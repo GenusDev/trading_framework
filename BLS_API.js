@@ -7,10 +7,12 @@
 
 //Strict mode activated.
 'use strict';
- 
-var apiKey = null;
-var mostRecentRequest = null;
-var blsURL = 'http://api.bls.gov/publicAPI/v2/timeseries/data/';
+console.log('helloworld')
+const apiKey = null;
+const mostRecentRequest = null;
+const blsURL = 'http://api.bls.gov/publicAPI/v2/timeseries/data/';
+
+p = requests.post('https://api.bls.gov/publicAPI/v1/timeseries/data/', data=data, headers=headers)
 
 /*
  * Sets the API Key of the user of the script
@@ -18,7 +20,8 @@ var blsURL = 'http://api.bls.gov/publicAPI/v2/timeseries/data/';
  * TODO -- Get this to search a local directory or other storage in
  * to separate out API key knowledge.
  */
-function checkAPIKey(){
+
+const checkAPIKey = () => {
 	 if(!localStorage.getItem('apiKey')){
 		 return null;
 	 }else{
@@ -68,7 +71,7 @@ function blsRequest(seriesReq, method){
 	var httpRequest = null;
 	
 	//Cribbing from <>'s CORS Request Example
-	httpRequest = openSession(seriesReq,method);
+	httpRequest = openSession(seriesReq, method);
 	
 	if(!httpRequest){
 		console.log("Stopping operation.  Unable to create new XMLHttpRequest.");
