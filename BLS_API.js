@@ -8,7 +8,7 @@
 //Strict mode activated.
 'use strict';
  
-var apiKey = null;
+var apiKey = '78cde6739045407386ed2dc608d6370a';
 var mostRecentRequest = null;
 var blsURL = 'http://api.bls.gov/publicAPI/v2/timeseries/data/';
 
@@ -111,3 +111,8 @@ function openSession(seriesReq, method){
 //Function to make a local copy of the most recent request.
 function cacheRequest(){
 }
+
+console.log(checkAPIKey())
+setAPIKey('78cde6739045407386ed2dc608d6370a')
+
+makeRequest('CES1021100001', [2011,2012])
