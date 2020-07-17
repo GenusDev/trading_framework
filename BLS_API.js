@@ -1,3 +1,6 @@
+
+const fetch = require('node-fetch');
+
 /*
  * This Javascript library is intended to serve as a wrapper for the Bureau of 
  * Labor Statistics' API.  It was designed with Version 2.0 in mind.
@@ -18,44 +21,66 @@ var blsURL = 'http://api.bls.gov/publicAPI/v2/timeseries/data/';
  * TODO -- Get this to search a local directory or other storage in
  * to separate out API key knowledge.
  */
-function checkAPIKey(){
-	 if(!localStorage.getItem('apiKey')){
-		 return null;
-	 }else{
-		 apiKey = localStorage.getItem('apiKey');
-	 }
- }
+// function checkAPIKey(){
+// 	 if(!localStorage.getItem('apiKey')){
+// 		 return null;
+// 	 }else{
+// 		 apiKey = localStorage.getItem('apiKey');
+// 	 }
+//  }
  
-function setAPIKey(key){
-	apiKey = key;
-	localStorage.setItem('apiKey',apiKey);
-}
+// function setAPIKey(key){
+// 	apiKey = key;
+// 	localStorage.setItem('apiKey',apiKey);
+// }
 
-function clearAPIKey(){
-	apiKey = null;
-	localStorage.clearItem('apiKey');
-}
+// function clearAPIKey(){
+// 	apiKey = null;
+// 	localStorage.clearItem('apiKey');
+// }
 
 /*
  * General wrapper for making BLS data requests
  */
 function makeRequest(seriesID, paramPairs){
-	console.log("Request begun.");
-	var payload = null;
-	//Step 1 -- See if the local cache has this request already
-	//Step 2 -- JSON-ify the request
+
+	const data = {"seriesid": ['CUUR0000SA0','SUUR0000SA0'],"startyear":"2011", "endyear":"2014"}
+
+	fetch('https://api.bls.gov/publicAPI/v2/timeseries/data', {
+		method: 'POST', // or 'PUT'
+		headers: {
+			'Content-Type': 'application/json',
+			// key
+		},
+		body: JSON.stringify(data),
+		})
+		.then((response) => response.json())
+		.then((data) => {
+		console.log('Success:', data, data.Results);
+
+		})
+		.catch((error) => {
+		console.error('Error:', error);
+		});
+
+
+
+	// console.log("Request begun.");
+	// var payload = null;
+	// //Step 1 -- See if the local cache has this request already
+	// //Step 2 -- JSON-ify the request
 	
-	//For single series requests, we only need to make a GET request.  For multiple series, we
-	//need to do a post.
-	if(typeof seriesID === "string" && !paramPairs){
-		payload = blsRequest(seriesID,'GET');
-	} else {
-		//JSON all series IDs in the seriesID parameter
-		//Then test to see if there are parameter Pairs to add
-		if(paramPairs){
-			//If so, add them to the request
-		}
-	}
+	// //For single series requests, we only need to make a GET request.  For multiple series, we
+	// //need to do a post.
+	// if(typeof seriesID === "string" && !paramPairs){
+	// 	payload = blsRequest(seriesID,'GET');
+	// } else {
+	// 	//JSON all series IDs in the seriesID parameter
+	// 	//Then test to see if there are parameter Pairs to add
+	// 	if(paramPairs){
+	// 		//If so, add them to the request
+	// 	}
+	// }
 	
 	//Step 3 -- Cache the Returned value
 	//Step 4 -- Return the request
@@ -63,56 +88,56 @@ function makeRequest(seriesID, paramPairs){
 }
 
 //Code to submit a BLS formatted request
-function blsRequest(seriesReq, method){
-	var reqResp = null;
-	var httpRequest = null;
+// function blsRequest(seriesReq, method){
+// 	var reqResp = null;
+// 	var httpRequest = null;
 	
-	//Cribbing from <>'s CORS Request Example
-	httpRequest = openSession(seriesReq,method);
+// 	//Cribbing from <>'s CORS Request Example
+// 	httpRequest = openSession(seriesReq,method);
 	
-	if(!httpRequest){
-		console.log("Stopping operation.  Unable to create new XMLHttpRequest.");
-		return false;
-	}
+// 	if(!httpRequest){
+// 		console.log("Stopping operation.  Unable to create new XMLHttpRequest.");
+// 		return false;
+// 	}
 	
-	httpRequest.onreadystatechange = function(){
-		if (httpRequest.readyState==4 && httpRequest.status==200){
-			reqResp=httpRequest.responseText;
-			console.log(reqResp);
-		}else{
-			console.log("Response has failed.  Review your settings and make a new request.");
-		}
-	}
+// 	httpRequest.onreadystatechange = function(){
+// 		if (httpRequest.readyState==4 && httpRequest.status==200){
+// 			reqResp=httpRequest.responseText;
+// 			console.log(reqResp);
+// 		}else{
+// 			console.log("Response has failed.  Review your settings and make a new request.");
+// 		}
+// 	}
 	
-	if(method === 'GET'){
-		httpRequest.open(method, blsURL + seriesReq);
-		httpRequest.send();
-	}else{
-		console.log('This is a todo.  How we get here?');
-	}
+// 	if(method === 'GET'){
+// 		httpRequest.open(method, blsURL + seriesReq);
+// 		httpRequest.send();
+// 	}else{
+// 		console.log('This is a todo.  How we get here?');
+// 	}
 	
-}
+// }
 
-function openSession(seriesReq, method){
-	var xDomReq = new XMLHttpRequest();
+// function openSession(seriesReq, method){
+// 	var xDomReq = new XMLHttpRequest();
 	
-	if("withCredentials" in xDomReq){
-		xDomReq.open(method, blsURL + seriesReq);
-	}else if (typeof XDomainRequest != "undefined"){
-		xDomReq = new XDomainRequest();
-		xDomReq.open(method, blsURL + seriesReq);
-	}else{
-		xDomReq = null;
-	}
+// 	if("withCredentials" in xDomReq){
+// 		xDomReq.open(method, blsURL + seriesReq);
+// 	}else if (typeof XDomainRequest != "undefined"){
+// 		xDomReq = new XDomainRequest();
+// 		xDomReq.open(method, blsURL + seriesReq);
+// 	}else{
+// 		xDomReq = null;
+// 	}
 	
-	return xDomReq;
-}
+// 	return xDomReq;
+// }
 
 //Function to make a local copy of the most recent request.
-function cacheRequest(){
-}
+// function cacheRequest(){
+// }
 
-console.log(checkAPIKey())
-setAPIKey('78cde6739045407386ed2dc608d6370a')
+// console.log(checkAPIKey())
+// setAPIKey('78cde6739045407386ed2dc608d6370a')
 
 makeRequest('CES1021100001', [2011,2012])
