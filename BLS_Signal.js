@@ -28,8 +28,10 @@ const APIHeadersAndData = {
 
 function makeRequest(seriesID, paramPairs){
 	// potentially better to put this in class, and make consistent across all signals. 
+	console.log('inside here')
 	let BLS_Signal  = new Signal(name='BLS',APIHeadersAndData, dataParameters='m')
 	return 'BLS_Signal'
+
 }
 
 /*

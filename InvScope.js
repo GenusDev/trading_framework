@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  const APICall = require('./APICall')
  
  
@@ -6,12 +7,19 @@
 
         super(APIHeadersAndData)
         
+=======
+ class InvScope {
+    constructor (){
+>>>>>>> 76b638bf6700ac72a0047000317db5477a3ea4f7
         this.predicted_dir = 0
         this.prob = 0
         this.value = [] //nadaq
         this.signals = [] // array of objects
         this.fundamentals = []
+<<<<<<< HEAD
         this.APIHeadersAndData = APIHeadersAndData
+=======
+>>>>>>> 76b638bf6700ac72a0047000317db5477a3ea4f7
     }
 
     determineCalculations(){
@@ -20,9 +28,13 @@
     }
 
     updateValue(){
+<<<<<<< HEAD
 
         this.value = this.callAPI(this.APIHeadersAndData)
         
+=======
+        //calls the nasdaq function and 
+>>>>>>> 76b638bf6700ac72a0047000317db5477a3ea4f7
     }
 
     updateData(){

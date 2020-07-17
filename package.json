@@ -1,0 +1,25 @@
+{
+  "name": "trading_framework",
+  "version": "1.0.0",
+  "description": "scalable trading graph framework",
+  "main": "APIs.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GenusDev/trading_framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GenusDev/trading_framework/issues"
+  },
+  "homepage": "https://github.com/GenusDev/trading_framework#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
