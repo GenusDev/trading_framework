@@ -24,39 +24,48 @@ api_key.apiKey = "bs8g407rh5r8i6g9ii8g"
 const finnhubClient = new finnhub.DefaultApi()
  
 // Stock candles
-finnhubClient.stockCandles("AAPL", "D", 1590988249, 1591852249, {}, (error, data, response) => {
+
+finnhubClient.stockCandles("GOOG", "D", 159090000, 1591852249, {}, (error, data, response) => {
     console.log(data)
 });
+
+// const date = new Date()
+
+// console.log('date', Date.parse(date))
+//Quote
+// finnhubClient.quote("AAPL", (error, data, response) => {
+//     console.log(data)
+// });
  
-//Company News
-finnhubClient.companyNews("AAPL", "2020-01-01", "2020-05-01", (error, data, response) => {
-    if (error) {
-        console.error(error);
-    } else {
-        console.log(data)
-    }
-});
+// //Company News
+// finnhubClient.companyNews("AAPL", "2020-01-01", "2020-05-01", (error, data, response) => {
+//     if (error) {
+//         console.error(error);
+//     } else {
+//         console.log(data)
+//     }
+// });
  
-// Investor Ownership
-let optsLimit = {'limit': 10};
-finnhubClient.investorsOwnership("AAPL", optsLimit, (error, data, response) => {
-    console.log(data)
-});
+// // Investor Ownership
+// let optsLimit = {'limit': 10};
+// finnhubClient.investorsOwnership("AAPL", optsLimit, (error, data, response) => {
+//     console.log(data)
+// });
  
-//Aggregate Indicator
-finnhubClient.aggregateIndicator("AAPL", "D", (error, data, response) => {
-    console.log(data)
-});
+// //Aggregate Indicator
+// finnhubClient.aggregateIndicator("AAPL", "D", (error, data, response) => {
+//     console.log(data)
+// });
  
-// Basic financials
-finnhubClient.companyBasicFinancials("AAPL", "margin", (error, data, response) => {
-    console.log(data)
-});
+// // Basic financials
+// finnhubClient.companyBasicFinancials("AAPL", "margin", (error, data, response) => {
+//     console.log(data)
+// });
  
-// Company earnings
-finnhubClient.companyEarnings("AAPL", {'limit': 10}, (error, data, response) => {
-    console.log(data)
-});
+// // Company earnings
+// finnhubClient.companyEarnings("AAPL", {'limit': 10}, (error, data, response) => {
+//     console.log(data)
+// });
  /*
 // Company EPS estimates
 finnhubClient.companyEpsEstimates("AAPL", {}, (error, data, response) => {
@@ -204,10 +213,7 @@ finnhubClient.priceTarget("AAPL", (error, data, response) => {
     console.log(data)
 });
  
-//Quote
-finnhubClient.quote("AAPL", (error, data, response) => {
-    console.log(data)
-});
+
  
 // Recommendation trends
 finnhubClient.recommendationTrends("AAPL", (error, data, response) => {

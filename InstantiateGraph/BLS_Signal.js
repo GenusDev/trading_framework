@@ -1,6 +1,6 @@
 
 const fetch = require('node-fetch');
-const Signal = require('./Signal.js')
+const Signal = require('../Signal.js')
 
 /*
  * This Javascript library is intended to serve as a wrapper for the Bureau of 
@@ -30,7 +30,8 @@ function makeRequest(seriesID, paramPairs){
 	// potentially better to put this in class, and make consistent across all signals. 
 	console.log('inside here')
 	let BLS_Signal  = new Signal(name='BLS',APIHeadersAndData, dataParameters='m')
-	return 'BLS_Signal'
+	console.log(BLS_Signal)
+	return BLS_Signal
 
 }
 

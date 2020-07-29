@@ -1,4 +1,4 @@
-const APICall = require('./APICall')
+const APICall = require('./API_call')
 
 
 class Signal extends APICall{
