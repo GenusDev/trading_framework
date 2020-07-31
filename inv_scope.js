@@ -1,52 +1,38 @@
- const APICall = require('./API_call')
+const APICall = require('./API_call');
 
-
- class InvScope extends APICall {
-    constructor (APIHeadersAndData){
-        super(APIHeadersAndData)
-        this.predicted_dir = 0
-        this.prob = 0
-        this.value = [] //nadaq
-        this.signals = [] // array of objects
-        this.fundamentals = []
-
-        // this.updateData()
+class InvScope extends APICall {
+  constructor(APIHeadersAndData) {
+    super(APIHeadersAndData);
+        this.predicted_dir = 0;
+        this.prob = 0;
+        this.value = []; //nadaq
+        this.signals = []; // array of objects
+        this.fundamentals = [];        
     }
 
-    // determineCalculations(){
-    //     this.dir = calculateDirection()
-    //     this.dir = calculateProbability()
-    // }
+    //calls the nasdaq function and
+  updateData() {
+    // pull in api information and update signals
+    this.updateValue();
+    // this.updateSignals()
+  }
 
-    updateData(){
-        // pull in api information and update signals
-        this.updateValue()
-        // this.updateSignals()
-    }
+  updateValue() {
+    //calls the nasdaq function and
+    this.value = this.APICall();
+    
+  }
 
+  updateSignals() {
+    // todo api call to each api
+    this.signals.forEach((sig) => {
+      sig.callAPI();
+    });
+  }
 
-    updateValue(){
-        //calls the nasdaq function and 
-        this.value = this.APICall()
+  calculateDirection() {}
 
-    }
-
-    updateSignals(){
-        // todo api call to each api 
-        this.signals.forEach((sig)=>{
-            sig.callAPI()
-        })
-        
-    }
-
-    calculateDirection(){
-
-    }
-
-    saveToMongo(){
-
-    }
-
+  saveToMongo() {}
 }
 
-module.exports = InvScope
+module.exports = InvScope;
