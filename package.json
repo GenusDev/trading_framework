@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/GenusDev/trading_framework#readme",
   "dependencies": {
+    "finnhub": "^1.1.7",
     "node-fetch": "^2.6.0"
   }
 }

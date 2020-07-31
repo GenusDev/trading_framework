@@ -3,10 +3,18 @@ const fetch = require('node-fetch');
 
 class APICall {
     constructor(HeadersAndData){
-        this.HeadersAndData  = HeadersAndData
+        // console.log('HeadersAndData', HeadersAndData)
+        if(HeadersAndData.library)
+            this.APICall = HeadersAndData.APICall
+        else
+            {
+                this.HeadersAndData  = HeadersAndData
+                this.APICall = this._APICall
+            
+            }
     }
 
-    APICall(){
+    _APICall(){
         const HeadersAndData = this.HeadersAndData
         let results = {}
         fetch(HeadersAndData.url, {
